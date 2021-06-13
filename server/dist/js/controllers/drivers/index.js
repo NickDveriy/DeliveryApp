@@ -15,8 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addDriver = exports.getAllDrivers = void 0;
 const driver_1 = __importDefault(require("../../models/driver"));
 const getAllDrivers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('REQUEST', req.query);
     try {
-        const drivers = yield driver_1.default.find();
+        const query = req.query || {};
+        if (query.deliveryAreas) {
+            query.deliveryAreas = { $elemMatch: { name: query.deliveryAreas } };
+        }
+        if (query.vehicleType) {
+            query.vehichleType = query.vehicleType;
+            delete query.vehicleType;
+        }
+        const drivers = yield driver_1.default.find(query);
         res.status(200).json({ drivers });
     }
     catch (e) {

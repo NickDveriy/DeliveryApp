@@ -3,8 +3,20 @@ import { IDriver } from "../../types/driver";
 import Driver from "../../models/driver";
 
 const getAllDrivers = async (req: Request, res: Response): Promise<void> => {
+    console.log('REQUEST', req.query)
     try {
-        const drivers: IDriver[] = await Driver.find();
+        const query = req.query || {};
+
+        if (query.deliveryAreas) {
+            query.deliveryAreas = { $elemMatch: { name: query.deliveryAreas } };
+        }
+
+        if (query.vehicleType) {
+            query.vehichleType = query.vehicleType;
+            delete query.vehicleType;
+        }
+
+        const drivers: IDriver[] = await Driver.find(query);
         res.status(200).json({ drivers });
     } catch (e) {
         throw e;
