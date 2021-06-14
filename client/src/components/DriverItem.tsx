@@ -14,7 +14,7 @@ const Driver: React.FC<DriverProps> = ({ driver }) => {
             break;
     }
     return (
-        <div className="driverItem">
+        <div className="driver-item">
             <div>
                 <h2>{driver.name.first} {driver.name.last}</h2>
                 <p>
@@ -35,7 +35,7 @@ const Driver: React.FC<DriverProps> = ({ driver }) => {
                 <p style={{ color: driver.VehiclColor }}>
                     <FontAwesomeIcon icon={vehicleIcon} />
                 </p>
-                <span className="tooltipText">{driver.VehiclColor} {driver.vehichleType}</span>
+                <span className="tooltip-text">{driver.VehiclColor} {driver.vehichleType}</span>
             </div>
 
         </div>

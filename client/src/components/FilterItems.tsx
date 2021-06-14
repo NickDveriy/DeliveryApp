@@ -91,7 +91,7 @@ const FilterItems: React.FC<Props> = ({ runFilter, driversData, inModal }) => {
     );
 
     return (
-        <div className={inModal ? 'filterItemsInModal' : 'filterItemsGeneral'}>
+        <div className={inModal ? 'filter-items-modal' : 'filter-items-general'}>
             <SelectVehicleType />
             <SelectDeliveryArea />
         </div>

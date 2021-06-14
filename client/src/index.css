@@ -23,7 +23,7 @@ body {
     margin: 1rem 0;
 }
 
-.driverItem {
+.driver-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,7 +39,7 @@ body {
   font-size: xx-large;
 }
 
-.vehicle .tooltipText {
+.vehicle .tooltip-text {
   visibility: hidden;
   width: 80px;
   background-color: wheat;
@@ -50,7 +50,7 @@ body {
   z-index: 1;
 }
 
-.vehicle:hover .tooltipText {
+.vehicle:hover .tooltip-text {
   visibility: visible;
 }
 
@@ -76,21 +76,6 @@ body {
   cursor: not-allowed;
 }
 
-/* .Form {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background: #fafafa;
-    margin-bottom: 1rem;
-} */
-
-/* .Form > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
 .modal input {
     background: #f5f6f7;
     padding: 0.5rem 1rem;
@@ -100,32 +85,23 @@ body {
     margin: 0 1rem 0 0;
 }
 
-/* .Form button {
-    background: #ff9900;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    cursor: pointer;
-    border: none;
-} */
-
-.filterItemsGeneral {
+.filter-items-general {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
-.filterItemsInModal {
+.filter-items-modal {
   display: inline-block; 
   width: 100%; 
   margin: 0 1rem 0 0;
 
 }
-.filterItemsInModal .select-custom-class {
+.filter-items-modal .select-custom-class {
   width: auto;
   margin: 1rem 0 0 0;
 }
-.filterItemsGeneral .select-custom-class {
+.filter-items-general .select-custom-class {
     width: 50%;
     margin: 1rem 0 0 0;
 }
