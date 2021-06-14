@@ -1,20 +1,17 @@
-import bodyParser from "body-parser";
 import express, { Express } from "express";
 import mongoose from "mongoose";
-import cors from "cors";
 import driverRoutes from "./routes";
 
 const app: Express = express();
 
 const PORT: string | number = process.env.PORT || 4000;
 
-app.use(bodyParser.json()); // handle json data
-app.use(bodyParser.urlencoded({ extended: true })); // handle URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
 app.use(driverRoutes);
 
-const mongoUri: string = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@jarviscluster.vjbi4.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
+const mongoUri: string = `mongodb+srv://nickDV:PmM4eYzMCIakZuww@jarviscluster.vjbi4.mongodb.net/deliveryDb?retryWrites=true&w=majority`;
 const mongoOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 mongoose.set("useFindAndModify", false);
 
