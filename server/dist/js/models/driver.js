@@ -4,31 +4,31 @@ const mongoose_1 = require("mongoose");
 const driverSchema = new mongoose_1.Schema({
     isActive: {
         type: Boolean,
-        default: false
+        default: false,
     },
     vehichleType: {
         type: String,
         required: true,
     },
     VehiclColor: {
-        type: String
+        type: String,
     },
     email: {
         type: String,
-        required: true
+        required: true,
     },
     phone: {
         type: String,
-        required: true
+        required: true,
     },
     name: {
         first: { type: String },
-        last: { type: String }
+        last: { type: String },
     },
     deliveryAreas: {
         type: [{
-                name: { type: String }
-            }]
-    }
+                name: { type: String },
+            }],
+    },
 });
 exports.default = mongoose_1.model("Driver", driverSchema);

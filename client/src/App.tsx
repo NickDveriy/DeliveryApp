@@ -5,10 +5,29 @@ import FilterItems from './components/FilterItems';
 import { getDrivers, addDriver } from "./API";
 
 
-const App: React.FC = () => {
-  const [drivers, setDrivers] = useState<IDriver[]>([]);
+type CurrentState = {
+  show: boolean,
+  drivers: IDriver[]
+}
 
-  const fetchDrivers = ( filterParams?: object ): void => {
+const App: React.FC = () => {
+  const [pageState, setPageState] = useState<CurrentState | any>({});
+
+  const setDrivers = (driversToSet: IDriver[]) => {
+    setPageState({
+      ...pageState,
+      drivers: driversToSet
+    });
+  };
+
+  const setShowModal = (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    setPageState({
+      ...pageState,
+      show: !pageState.show
+    });
+  };
+
+  const fetchDrivers = (filterParams?: object): void => {
     getDrivers(filterParams)
       .then(({ data: { drivers } }: IDriver[] | any) => setDrivers(drivers))
       .catch((err: Error) => console.warn(err));
@@ -26,21 +45,34 @@ const App: React.FC = () => {
           throw new Error("Error! Record is not saved");
         }
         setDrivers(data.drivers);
+        setShowModal();
+        alert(data.message);
       })
       .catch(err => console.log(err));
   };
 
-    return (
+  return (
     <main className='App'>
-      <h1>Drivers List</h1>
-      <FilterItems runFilter={fetchDrivers} driversData={drivers} />
-      {/* <AddDriver saveDriver={handleSaveDriver} /> */}
-      {drivers.map((driver: IDriver) => (
+      <div className="header-title">
+        <h1>Drivers List</h1>
+        <button
+          className="toggle-button"
+          onClick={e => {
+            setShowModal(e);
+          }}
+        >Add driver
+        </button>
+      </div>
+
+      <AddDriver onClose={setShowModal} saveDriver={handleSaveDriver} show={pageState.show} driversData={pageState.drivers || []} />
+      <FilterItems runFilter={fetchDrivers} driversData={pageState.drivers || []} inModal={false} />
+      {(pageState.drivers || []).map((driver: IDriver) => (
         <DriverItem
           key={driver._id}
           driver={driver}
         />
       ))}
+
     </main>
   );
 };

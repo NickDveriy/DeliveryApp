@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addDriver = exports.getAllDrivers = void 0;
 const driver_1 = __importDefault(require("../../models/driver"));
 const getAllDrivers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('REQUEST', req.query);
     try {
         const query = req.query || {};
         if (query.deliveryAreas) {
@@ -37,24 +36,24 @@ const addDriver = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const body = req.body;
         const driver = new driver_1.default({
+            isActive: body.isActive,
             name: body.name,
             vehichleType: body.vehichleType,
             VehiclColor: body.VehiclColor,
             email: body.email,
             phone: body.phone,
-            deliveryAreas: body.deliveryAreas
+            deliveryAreas: body.deliveryAreas,
         });
         const newDriver = yield driver.save();
         const allDrivers = yield driver_1.default.find();
         res.status(201).json({
             message: "Driver was added succesfully",
             driver: newDriver,
-            drivers: allDrivers
+            drivers: allDrivers,
         });
     }
     catch (e) {
         throw e;
     }
-    ;
 });
 exports.addDriver = addDriver;

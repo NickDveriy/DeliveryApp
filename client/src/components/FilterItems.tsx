@@ -3,7 +3,8 @@ import Select from 'react-select';
 
 type Props = {
     runFilter: (filterParams: object | any) => void,
-    driversData: object | any
+    driversData: object | any,
+    inModal: boolean
 };
 
 type FilterParams = {
@@ -14,27 +15,31 @@ type FilterParams = {
 let deliveryAreasNames: string[] = [];
 let vehicleTypes: string[] = [];
 
-const FilterItems: React.FC<Props> = ({ runFilter, driversData }) => {
+const FilterItems: React.FC<Props> = ({ runFilter, driversData, inModal }) => {
 
     const [selectedOption, setSelectedOption] = useState<FilterParams | any>({});
 
-    const handleChange = (e: {} | any) => {
-        console.log({
-            ...selectedOption,
-            [e.target]: e.value
-        });
-
-        setSelectedOption({
-            ...selectedOption,
-            [e.target]: e
-        });
-        runFilter({
-            ...selectedOption,
-            [e.target]: e
-        });
+    const handleChange = (e: {} | any, targetName: string) => {        
+        if ( !e ) {
+            setSelectedOption({
+                ...selectedOption,
+                [targetName]: null
+            });
+            runFilter({
+                ...selectedOption,
+                [targetName]: null
+            });
+        } else {
+            setSelectedOption({
+                ...selectedOption,
+                [targetName]: e
+            });
+            runFilter({
+                ...selectedOption,
+                [targetName]: e
+            });
+        }        
     };
-
-
 
     for (const driver of driversData) {
         for (const deliveryArea of driver.deliveryAreas) {
@@ -48,42 +53,45 @@ const FilterItems: React.FC<Props> = ({ runFilter, driversData }) => {
     }
 
     const vehicleTypeOptions: object[] = vehicleTypes.map((type: string) => {
-        return {
-            target: 'vehicleType',
+        return {            
             value: type,
             label: type
         };
     });
 
     const deliveryAreaOptions: object[] = deliveryAreasNames.map((name: string) => {
-        return {
-            target: 'area',
+        return {            
             value: name,
             label: name
         };
     });
 
-    const SelectVehicleType = () => (
-        <Select
-            placeholder="Select vehicle type"
-            value={selectedOption.vehicleType}
-            options={vehicleTypeOptions}
-            onChange={handleChange}
-        />
-    );
+    const SelectVehicleType = function () {
+        return (
+            <Select
+                isClearable={true}
+                name='one'
+                className="select-custom-class"
+                placeholder="Select vehicle type"
+                value={selectedOption.vehicleType || ''}
+                options={vehicleTypeOptions}
+                onChange={e => handleChange(e, 'vehicleType') }
+            />);
+    };
 
     const SelectDeliveryArea = () => (
         <Select
+            isClearable={true}
+            className="select-custom-class"
             placeholder="Select delivery area"
-            value={selectedOption.area}
+            value={selectedOption.area || ''}
             options={deliveryAreaOptions}
-            onChange={handleChange}
+            onChange={e => handleChange(e, 'area')}
         />
     );
 
-
     return (
-        <div>
+        <div className={inModal ? 'filterItemsInModal' : 'filterItemsGeneral'}>
             <SelectVehicleType />
             <SelectDeliveryArea />
         </div>

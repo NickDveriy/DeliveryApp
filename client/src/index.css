@@ -54,69 +54,133 @@ body {
   visibility: visible;
 }
 
-.Card--text h1 {
-    color: #ff9900;
+.header-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
 }
 
-.Card--button button {
-    background: #f5f6f7;
+.toggle-button {  
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
     padding: 0.4rem 1rem;
-    border-radius: 20px;
+    border-radius: 5px;
     cursor: pointer;
+    margin-left: auto;
 }
 
-.Card--button__delete {
-    border: 1px solid rgb(234, 65, 59);
-    color:rgb(234, 65, 59);
+.toggle-button:disabled {
+  background-color: #77b2f1;
+  cursor: not-allowed;
 }
 
-.Card--button__done {
-    border: 1px solid #00aa69;
-    color: #00aa69;
-    margin-right: 1rem;
-}
-
-.Form {
+/* .Form {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
     background: #fafafa;
     margin-bottom: 1rem;
-}
+} */
 
-.Form > div {
+/* .Form > div {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.Form input {
+.modal input {
     background: #f5f6f7;
     padding: 0.5rem 1rem;
     border: 1px solid #ff9900;
     border-radius: 10px;
     display: block;
-    margin: 0.3rem 1rem 0 0;
+    margin: 0 1rem 0 0;
 }
 
-.Form label {
-}
-
-.Form button {
+/* .Form button {
     background: #ff9900;
     color: #fff;
     padding: 0.5rem 1rem;
     border-radius: 20px;
     cursor: pointer;
     border: none;
+} */
+
+.filterItemsGeneral {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.filterItemsInModal {
+  display: inline-block; 
+  width: 100%; 
+  margin: 0 1rem 0 0;
+
+}
+.filterItemsInModal .select-custom-class {
+  width: auto;
+  margin: 1rem 0 0 0;
+}
+.filterItemsGeneral .select-custom-class {
+    width: 50%;
+    margin: 1rem 0 0 0;
 }
 
-.line-through {
-    text-decoration: line-through;
-    color: #777 !important;
+.modal {
+  background: white;
+  border: 1px solid #ccc;
+  transition: 1.1s ease-out;
+  box-shadow: -2rem 2rem 2rem rgba(0, 0, 0, 0.2);
+  filter: blur(0);
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+  position: absolute;
+  top: 10px;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 50%;
+  z-index: 2;  
 }
 
-.hide-button {
-    display: none;
+.modal.off {
+  opacity: 0;
+  visibility: hidden;
+  filter: blur(8px);
+  transform: scale(0.33);
+  box-shadow: 1rem 0 0 rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+  border-bottom: 1px solid #ccc;
+  padding: 1rem;
+  text-align: center;  
+}
+.modal .content {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+.modal .actions {
+  border-top: 1px solid #ccc;
+  background: #eee;
+  padding: 0.5rem 1rem;
+  align-items: center;
+}
+.actions button {
+  border: 0;
+  color: #fff;
+  margin: 5px;
+  background-color: #007bff;
+  border-color: #007bff;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  line-height: 1;
 }

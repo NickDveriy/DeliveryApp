@@ -1,11 +1,10 @@
 import { Router } from "express";
-import { get } from "mongoose";
 import { getAllDrivers, addDriver } from "../controllers/drivers";
 
 const router: Router = Router();
 
-router.get('/drivers', getAllDrivers);
+router.get("/drivers", getAllDrivers);
 
-router.post('/add-driver', addDriver);
+router.post("/add-driver", addDriver);
 
 export default router;

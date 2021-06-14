@@ -4,7 +4,6 @@ const baseUrl: string = "http://localhost:4000";
 
 export const getDrivers = async ( params?: any ): Promise<AxiosResponse<ApiDataType>> => {
     try {
-        console.log('par', params);
         const drivers: AxiosResponse<ApiDataType> = await axios.get(baseUrl + "/drivers", {
             params: {
                 isActive: true,
@@ -19,17 +18,20 @@ export const getDrivers = async ( params?: any ): Promise<AxiosResponse<ApiDataT
     }
 };
 
-export const addDriver = async (formData: IDriver): Promise<AxiosResponse<ApiDataType>> => {
+export const addDriver = async (formData: IDriver | any): Promise<AxiosResponse<ApiDataType>> => {
 
     try {
         const driver: Omit<IDriver, "_id"> = {
-            name: formData.name,
-            isActive: false,
+            name: {
+                last: formData.last,
+                first: formData.first
+            },
+            isActive: true,
             phone: formData.phone,
             email: formData.email,
-            vehichleType: formData.vehichleType,
-            VehiclColor: formData.VehiclColor,
-            deliveryAreas: formData.deliveryAreas
+            vehichleType: formData.vehicleType,
+            VehiclColor: formData.vehicleColor,
+            deliveryAreas: [{name: formData.area}]
         };
 
         const saveDriver: AxiosResponse<ApiDataType> = await axios.post(baseUrl + "/add-driver", driver);

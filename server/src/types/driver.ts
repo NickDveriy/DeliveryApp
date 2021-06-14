@@ -1,6 +1,6 @@
-import { Document } from 'mongoose';
-import { IDeliveryArea } from './deliveryArea';
-import { IPersonName } from './personName';
+import { Document } from "mongoose";
+import { IDeliveryArea } from "./deliveryArea";
+import { IPersonName } from "./personName";
 
 export interface IDriver extends Document {
     isActive: boolean,

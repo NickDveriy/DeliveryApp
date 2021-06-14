@@ -1,3 +1,4 @@
+import bodyParser from "body-parser";
 import express, { Express } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -7,6 +8,9 @@ const app: Express = express();
 
 const PORT: string | number = process.env.PORT || 4000;
 
+app.use(bodyParser.json()); // handle json data
+app.use(bodyParser.urlencoded({ extended: true })); // handle URL-encoded data
+
 app.use(cors());
 app.use(driverRoutes);
 
@@ -15,7 +19,7 @@ const mongoOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 mongoose.set("useFindAndModify", false);
 
 mongoose.connect(mongoUri, mongoOptions).then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server is listening on http://localhost:${PORT}`);
-    })
-}).catch(error => { throw error });
+  app.listen(PORT, () => {
+    console.log(`Server is listening on http://localhost:${PORT}`);
+  });
+}).catch((error) => { throw error; });
