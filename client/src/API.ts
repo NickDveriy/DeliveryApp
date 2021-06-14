@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const baseUrl: string = "http://localhost:4000";
+const baseUrl: string = "";
 
 export const getDrivers = async ( params?: any ): Promise<AxiosResponse<ApiDataType>> => {
     try {
